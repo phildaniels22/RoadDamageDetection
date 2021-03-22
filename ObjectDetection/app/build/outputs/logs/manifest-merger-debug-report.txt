@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-33:12
+ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-34:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\phild\.gradle\caches\transforms-2\files-2.1\cdaa83194e29814d01eb1fc6312e9c9a\constraintlayout-2.0.4\AndroidManifest.xml:2:1-11:12
 MERGED from [org.pytorch:pytorch_android_torchvision:1.7.0] C:\Users\phild\.gradle\caches\transforms-2\files-2.1\1e5b672b7a6d0746ed6b49db222909a6\jetified-pytorch_android_torchvision-1.7.0\AndroidManifest.xml:2:1-10:12
 MERGED from [org.pytorch:pytorch_android:1.7.0] C:\Users\phild\.gradle\caches\transforms-2\files-2.1\f022dfc096a45da957f02c349a4ebb96\jetified-pytorch_android-1.7.0\AndroidManifest.xml:2:1-10:12
@@ -30,20 +30,20 @@ MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\phild\.gradle\
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\phild\.gradle\caches\transforms-2\files-2.1\8cf26fd0d5f767ad6dfe1019ab25b952\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\phild\.gradle\caches\transforms-2\files-2.1\86f8c8e32c7613bbe5e86eb4377e9413\jetified-savedstate-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\phild\.gradle\caches\transforms-2\files-2.1\bcf856ddfeb04b3b73ed182739910d39\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-33:12
-INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-33:12
+INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-34:12
+INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-34:12
 	package
 		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:3:5-47
 		INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-33:12
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-34:12
 		INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-33:12
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:1-34:12
 		INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:2:11-69
@@ -59,12 +59,16 @@ uses-permission#android.permission.ACCESS_COARSE_LOCATION
 ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:7:5-81
 	android:name
 		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:7:22-78
-uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:8:5-81
+uses-permission#android.permission.MANAGE_EXTERNAL_STORAGE
+ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:8:5-82
 	android:name
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:8:22-78
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:8:22-79
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:9:5-81
+	android:name
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:9:22-78
 application
-ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:10:5-31:19
+ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:11:5-32:19
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\phild\.gradle\caches\transforms-2\files-2.1\cdaa83194e29814d01eb1fc6312e9c9a\constraintlayout-2.0.4\AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] C:\Users\phild\.gradle\caches\transforms-2\files-2.1\cdaa83194e29814d01eb1fc6312e9c9a\constraintlayout-2.0.4\AndroidManifest.xml:9:5-20
 MERGED from [androidx.camera:camera-camera2:1.0.0-alpha05] C:\Users\phild\.gradle\caches\transforms-2\files-2.1\03e258dd1a54bb78b5d34876ddcad997\jetified-camera-camera2-1.0.0-alpha05\AndroidManifest.xml:24:5-31:19
@@ -76,43 +80,43 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\ph
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.3.1] C:\Users\phild\.gradle\caches\transforms-2\files-2.1\ae3468b444d41a56f261ecbb8448fe17\core-1.3.1\AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:15:9-35
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:16:9-35
 	android:label
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:13:9-41
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:14:9-41
 	android:roundIcon
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:14:9-54
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:15:9-54
 	android:icon
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:12:9-43
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:13:9-43
 	android:allowBackup
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:11:9-35
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:12:9-35
 	android:theme
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:16:9-40
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:17:9-40
 activity#org.pytorch.demo.objectdetection.MainActivity
-ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:18:9-25:20
+ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:19:9-26:20
 	android:screenOrientation
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:20:13-49
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:21:13-49
 	android:configChanges
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:19:13-48
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:20:13-48
 	android:name
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:18:19-47
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:19:19-47
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:21:13-24:29
+ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:22:13-25:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:22:17-69
+ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:23:17-69
 	android:name
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:22:25-66
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:23:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:23:17-77
+ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:24:17-77
 	android:name
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:23:27-74
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:24:27-74
 activity#org.pytorch.demo.objectdetection.ObjectDetectionActivity
-ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:26:9-30:20
+ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:27:9-31:20
 	android:screenOrientation
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:29:13-49
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:30:13-49
 	android:configChanges
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:28:13-48
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:29:13-48
 	android:name
-		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:27:13-52
+		ADDED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml:28:13-52
 uses-sdk
 INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\phild\Documents\GitHub\RoadDamageDetection\ObjectDetection\app\src\main\AndroidManifest.xml

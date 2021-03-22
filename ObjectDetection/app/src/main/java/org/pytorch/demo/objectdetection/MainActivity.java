@@ -22,6 +22,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -44,6 +45,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity implements Runnable {
     private int mImageIndex = 0;
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements Runnable {
     private Bitmap mBitmap = null;
     private Module mModule = null;
     private float mImgScaleX, mImgScaleY, mIvScaleX, mIvScaleY, mStartX, mStartY;
+    public int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements Runnable {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
         }
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
         setContentView(R.layout.activity_main);
 
         try {
@@ -189,6 +196,8 @@ public class MainActivity extends AppCompatActivity implements Runnable {
                         matrix.postRotate(90.0f);
                         mBitmap = Bitmap.createBitmap(mBitmap, 0, 0, mBitmap.getWidth(), mBitmap.getHeight(), matrix, true);
                         mImageView.setImageBitmap(mBitmap);
+
+
                     }
                     break;
                 case 1:
