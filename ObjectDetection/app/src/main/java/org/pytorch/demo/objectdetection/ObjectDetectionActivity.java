@@ -8,6 +8,10 @@ import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.YuvImage;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.media.Image;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -16,6 +20,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.TextureView;
 import android.view.ViewStub;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
@@ -31,9 +36,14 @@ import org.pytorch.torchvision.TensorImageUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class ObjectDetectionActivity extends AbstractCameraXActivity<ObjectDetectionActivity.AnalysisResult> {
@@ -66,6 +76,7 @@ public class ObjectDetectionActivity extends AbstractCameraXActivity<ObjectDetec
         mResultView.setResults(result.mResults);
         mResultView.invalidate();
     }
+
 
     private Bitmap imgToBitmap(Image image) {
         Image.Plane[] planes = image.getPlanes();
@@ -120,18 +131,34 @@ public class ObjectDetectionActivity extends AbstractCameraXActivity<ObjectDetec
         for(int i=0; i<results.size(); i++) {
 
             if(results.get(i).score >= 0.4) {
+
+                //Image Path
                 String root = Environment.getExternalStoragePublicDirectory(
                         Environment.DIRECTORY_PICTURES).toString();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd");
+                Date now = new Date();
 
-                File myDir = new File(root + "/saved_images");
+                File myDir = new File(root + "/Road_Damage_Detection-"+formatter.format(now));
                 myDir.mkdirs();
+
+                //Text Path
+                String text_root = Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_DOCUMENTS).toString();
+                File textDir = new File(text_root + "/Road_Damage_Detection-"+formatter.format(now));
+                String fileName = "Road_Damage_Detection_" + formatter.format(now) + ".txt";
+
+
+
                 Random generator = new Random();
 
-                int n = 10000;
-                n = generator.nextInt(n);
+                int n =0;
                 String fname = "Image-" + n + ".jpg";
                 File file = new File(myDir, fname);
-                if (file.exists()) file.delete();
+                while(file.exists()){
+                    n++;
+                    fname = "Image-" + n + ".jpg";
+                    file = new File(myDir, fname);
+                }
                 try {
                     FileOutputStream out = new FileOutputStream(file);
                     resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
@@ -143,6 +170,31 @@ public class ObjectDetectionActivity extends AbstractCameraXActivity<ObjectDetec
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+
+                try {
+                    //if(!textDir.exists()){
+                    textDir.mkdirs();
+                    //}
+                    File gpxfile = new File(textDir, fileName);
+                    String sBody;
+                    sBody="Image"+n+" Damage Type-" +results.get(i).classIndex+ " Damage Certainty-"+ results.get(i).score;
+
+
+                    FileWriter writer = new FileWriter(gpxfile,true);
+                    writer.append(sBody+"\n\n");
+                    writer.flush();
+                    writer.close();
+                    Toast.makeText(this, "Data has been written to Report File", Toast.LENGTH_SHORT).show();
+                }
+                catch(IOException e)
+                {
+                    e.printStackTrace();
+
+                }
+
+
+
                 MediaScannerConnection.scanFile(this, new String[]{file.toString()}, null,
                         new MediaScannerConnection.OnScanCompletedListener() {
                             public void onScanCompleted(String path, Uri uri) {
@@ -150,6 +202,10 @@ public class ObjectDetectionActivity extends AbstractCameraXActivity<ObjectDetec
                                 Log.i("ExternalStorage", "-> uri=" + uri);
                             }
                         });
+
+
+
+
                 break;
             }
         }

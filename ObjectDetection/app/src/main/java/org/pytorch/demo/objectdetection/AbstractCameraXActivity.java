@@ -59,7 +59,7 @@ public abstract class AbstractCameraXActivity<R> extends BaseModuleActivity {
             if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                 Toast.makeText(
                     this,
-                    "You can't use object detection example without granting CAMERA permission",
+                    "You can't use road damage detection without granting CAMERA permission",
                     Toast.LENGTH_LONG)
                     .show();
                 finish();
