@@ -2,6 +2,7 @@ package org.pytorch.demo.objectdetection;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
@@ -11,6 +12,7 @@ import android.graphics.YuvImage;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.Image;
 import android.media.MediaScannerConnection;
@@ -25,7 +27,12 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.camera.core.ImageProxy;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.pytorch.IValue;
 import org.pytorch.Module;
@@ -46,9 +53,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+
 public class ObjectDetectionActivity extends AbstractCameraXActivity<ObjectDetectionActivity.AnalysisResult> {
     private Module mModule = null;
     private ResultView mResultView;
+    private FusedLocationProviderClient client;
+    public double longitude;
+    public double latitude;
+    public String gps;
 
     static class AnalysisResult {
         private final ArrayList<Result> mResults;
@@ -106,27 +118,43 @@ public class ObjectDetectionActivity extends AbstractCameraXActivity<ObjectDetec
     @Nullable
     protected AnalysisResult analyzeImage(ImageProxy image, int rotationDegrees) {
         if (mModule == null) {
-            mModule = PyTorchAndroid.loadModuleFromAsset(getAssets(), "yolov5s.torchscript.pt");
+            mModule = PyTorchAndroid.loadModuleFromAsset(getAssets(), "derek.torchscript.pt");
         }
         Bitmap bitmap = imgToBitmap(image.getImage());
         Matrix matrix = new Matrix();
         matrix.postRotate(90.0f);
         bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         Bitmap resizedBitmap = Bitmap.createScaledBitmap(bitmap, PrePostProcessor.mInputWidth, PrePostProcessor.mInputHeight, true);
-
-
-
         final Tensor inputTensor = TensorImageUtils.bitmapToFloat32Tensor(resizedBitmap, PrePostProcessor.NO_MEAN_RGB, PrePostProcessor.NO_STD_RGB);
         IValue[] outputTuple = mModule.forward(IValue.from(inputTensor)).toTuple();
         final Tensor outputTensor = outputTuple[0].toTensor();
         final float[] outputs = outputTensor.getDataAsFloatArray();
 
-        float imgScaleX = (float)bitmap.getWidth() / PrePostProcessor.mInputWidth;
-        float imgScaleY = (float)bitmap.getHeight() / PrePostProcessor.mInputHeight;
-        float ivScaleX = (float)mResultView.getWidth() / bitmap.getWidth();
-        float ivScaleY = (float)mResultView.getHeight() / bitmap.getHeight();
+        float imgScaleX = (float) bitmap.getWidth() / PrePostProcessor.mInputWidth;
+        float imgScaleY = (float) bitmap.getHeight() / PrePostProcessor.mInputHeight;
+        float ivScaleX = (float) mResultView.getWidth() / bitmap.getWidth();
+        float ivScaleY = (float) mResultView.getHeight() / bitmap.getHeight();
 
         final ArrayList<Result> results = PrePostProcessor.outputsToNMSPredictions(outputs, imgScaleX, imgScaleY, ivScaleX, ivScaleY, 0, 0);
+
+        client = LocationServices.getFusedLocationProviderClient(this);
+
+
+        client.getLastLocation().addOnSuccessListener(ObjectDetectionActivity.this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    gps = location.toString();
+                    longitude = location.getLongitude();
+                    latitude = location.getLatitude();
+                }
+            }
+        });
+
+
+
+
+
 
         for(int i=0; i<results.size(); i++) {
 
@@ -172,13 +200,14 @@ public class ObjectDetectionActivity extends AbstractCameraXActivity<ObjectDetec
                 }
 
 
+
                 try {
                     //if(!textDir.exists()){
                     textDir.mkdirs();
                     //}
                     File gpxfile = new File(textDir, fileName);
                     String sBody;
-                    sBody="Image"+n+" Damage Type-" +results.get(i).classIndex+ " Damage Certainty-"+ results.get(i).score;
+                    sBody="Image"+n+" Damage Type-" +results.get(i).classIndex+ " Damage Certainty-"+ results.get(i).score + " Latitude="+latitude+" Longitude="+longitude;
 
 
                     FileWriter writer = new FileWriter(gpxfile,true);

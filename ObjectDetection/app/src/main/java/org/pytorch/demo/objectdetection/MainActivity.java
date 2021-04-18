@@ -12,9 +12,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -23,6 +25,7 @@ import android.graphics.Matrix;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.IBinder;
 import android.widget.TextView;
 
 import android.net.Uri;
@@ -34,6 +37,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import org.pytorch.IValue;
 import org.pytorch.Module;
@@ -53,19 +60,18 @@ import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 
+import static android.location.LocationManager.GPS_PROVIDER;
+
 public class MainActivity extends AppCompatActivity implements Runnable{
 
-    //GPS STUFF
-    protected LocationManager locationManager;
-    protected LocationListener locationListener;
-    String lat;
-    String provider;
-    protected String latitude,longitude;
-    protected boolean gps_enabled,network_enabled;
+
+
 
 
     private int mImageIndex = 0;
     private String[] mTestImages = {"RoadDamageTypeDef.png"};
+
+
 
     private ImageView mImageView;
     private ResultView mResultView;
@@ -80,9 +86,6 @@ public class MainActivity extends AppCompatActivity implements Runnable{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         }
@@ -94,7 +97,15 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
         setContentView(R.layout.activity_main);
+
+
 
         try {
             mBitmap = BitmapFactory.decodeStream(getAssets().open(mTestImages[mImageIndex]));
@@ -108,53 +119,6 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         mResultView = findViewById(R.id.resultView);
         mResultView.setVisibility(View.INVISIBLE);
 
-        /*final Button buttonTest = findViewById(R.id.testButton);
-        buttonTest.setText(("Test Image 1/3"));
-        buttonTest.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mResultView.setVisibility(View.INVISIBLE);
-                mImageIndex = (mImageIndex + 1) % mTestImages.length;
-                buttonTest.setText(String.format("Text Image %d/%d", mImageIndex + 1, mTestImages.length));
-
-                try {
-                    mBitmap = BitmapFactory.decodeStream(getAssets().open(mTestImages[mImageIndex]));
-                    mImageView.setImageBitmap(mBitmap);
-                } catch (IOException e) {
-                    Log.e("Object Detection", "Error reading assets", e);
-                    finish();
-                }
-            }
-        });
-
-
-        final Button buttonSelect = findViewById(R.id.selectButton);
-        buttonSelect.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mResultView.setVisibility(View.INVISIBLE);
-
-                final CharSequence[] options = { "Choose from Photos", "Take Picture", "Cancel" };
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("New Test Image");
-
-                builder.setItems(options, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int item) {
-                        if (options[item].equals("Take Picture")) {
-                            Intent takePicture = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                            startActivityForResult(takePicture, 0);
-                        }
-                        else if (options[item].equals("Choose from Photos")) {
-                            Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                            startActivityForResult(pickPhoto , 1);
-                        }
-                        else if (options[item].equals("Cancel")) {
-                            dialog.dismiss();
-                        }
-                    }
-                });
-                builder.show();
-            }
-        });*/
 
         final Button buttonLive = findViewById(R.id.liveButton);
         buttonLive.setOnClickListener(new View.OnClickListener() {
@@ -164,30 +128,8 @@ public class MainActivity extends AppCompatActivity implements Runnable{
             }
         });
 
-        /*mButtonDetect = findViewById(R.id.detectButton);
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mButtonDetect.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                mButtonDetect.setEnabled(false);
-                mProgressBar.setVisibility(ProgressBar.VISIBLE);
-                mButtonDetect.setText(getString(R.string.run_model));
-
-                mImgScaleX = (float)mBitmap.getWidth() / PrePostProcessor.mInputWidth;
-                mImgScaleY = (float)mBitmap.getHeight() / PrePostProcessor.mInputHeight;
-
-                mIvScaleX = (mBitmap.getWidth() > mBitmap.getHeight() ? (float)mImageView.getWidth() / mBitmap.getWidth() : (float)mImageView.getHeight() / mBitmap.getHeight());
-                mIvScaleY  = (mBitmap.getHeight() > mBitmap.getWidth() ? (float)mImageView.getHeight() / mBitmap.getHeight() : (float)mImageView.getWidth() / mBitmap.getWidth());
-
-                mStartX = (mImageView.getWidth() - mIvScaleX * mBitmap.getWidth())/2;
-                mStartY = (mImageView.getHeight() -  mIvScaleY * mBitmap.getHeight())/2;
-
-                Thread thread = new Thread(MainActivity.this);
-                thread.start();
-            }
-        });*/
-
         try {
-            mModule = PyTorchAndroid.loadModuleFromAsset(getAssets(), "yolov5s.torchscript.pt");
+            mModule = PyTorchAndroid.loadModuleFromAsset(getAssets(), "derek.torchscript.pt");
             BufferedReader br = new BufferedReader(new InputStreamReader(getAssets().open("classes.txt")));
             String line;
             List<String> classes = new ArrayList<>();
@@ -201,6 +143,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
             finish();
         }
     }
+
 
 
 
@@ -253,6 +196,8 @@ public class MainActivity extends AppCompatActivity implements Runnable{
         final Tensor outputTensor = outputTuple[0].toTensor();
         final float[] outputs = outputTensor.getDataAsFloatArray();
         final ArrayList<Result> results =  PrePostProcessor.outputsToNMSPredictions(outputs, mImgScaleX, mImgScaleY, mIvScaleX, mIvScaleY, mStartX, mStartY);
+
+
 
         runOnUiThread(() -> {
             mButtonDetect.setEnabled(true);
