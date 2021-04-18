@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements Runnable{
 
         try {
             mModule = PyTorchAndroid.loadModuleFromAsset(getAssets(), "derek.torchscript.pt");
-            BufferedReader br = new BufferedReader(new InputStreamReader(getAssets().open("classes.txt")));
+            BufferedReader br = new BufferedReader(new InputStreamReader(getAssets().open("classes1.txt")));
             String line;
             List<String> classes = new ArrayList<>();
             while ((line = br.readLine()) != null) {

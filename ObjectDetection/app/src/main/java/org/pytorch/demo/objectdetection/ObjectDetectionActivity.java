@@ -158,34 +158,34 @@ public class ObjectDetectionActivity extends AbstractCameraXActivity<ObjectDetec
 
         for(int i=0; i<results.size(); i++) {
 
-            if(results.get(i).score >= 0.4) {
+            if(results.get(i).score >= 0.05) {
 
                 //Image Path
-                String root = Environment.getExternalStoragePublicDirectory(
-                        Environment.DIRECTORY_PICTURES).toString();
+                /*String root = Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_PICTURES).toString();*/
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd");
                 Date now = new Date();
 
-                File myDir = new File(root + "/Road_Damage_Detection-"+formatter.format(now));
-                myDir.mkdirs();
+                /*File myDir = new File(root + "/Road_Damage_Detection-"+formatter.format(now));
+                myDir.mkdirs();*/
 
                 //Text Path
                 String text_root = Environment.getExternalStoragePublicDirectory(
                         Environment.DIRECTORY_DOCUMENTS).toString();
                 File textDir = new File(text_root + "/Road_Damage_Detection-"+formatter.format(now));
                 String fileName = "Road_Damage_Detection_" + formatter.format(now) + ".txt";
-
+                textDir.mkdirs();
 
 
                 Random generator = new Random();
 
                 int n =0;
                 String fname = "Image-" + n + ".jpg";
-                File file = new File(myDir, fname);
+                File file = new File(textDir, fname);
                 while(file.exists()){
                     n++;
                     fname = "Image-" + n + ".jpg";
-                    file = new File(myDir, fname);
+                    file = new File(textDir, fname);
                 }
                 try {
                     FileOutputStream out = new FileOutputStream(file);
@@ -202,9 +202,7 @@ public class ObjectDetectionActivity extends AbstractCameraXActivity<ObjectDetec
 
 
                 try {
-                    //if(!textDir.exists()){
-                    textDir.mkdirs();
-                    //}
+
                     File gpxfile = new File(textDir, fileName);
                     String sBody;
                     sBody="Image"+n+" Damage Type-" +results.get(i).classIndex+ " Damage Certainty-"+ results.get(i).score + " Latitude="+latitude+" Longitude="+longitude;
