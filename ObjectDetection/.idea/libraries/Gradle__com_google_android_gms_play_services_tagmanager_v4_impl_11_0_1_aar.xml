@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.android.gms:play-services-tagmanager-v4-impl:11.0.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/024eece37fabfac436fbab5b2032e717/jetified-play-services-tagmanager-v4-impl-11.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/024eece37fabfac436fbab5b2032e717/jetified-play-services-tagmanager-v4-impl-11.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/024eece37fabfac436fbab5b2032e717/jetified-play-services-tagmanager-v4-impl-11.0.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9a425922bedea04d18f55577a8cf075d/jetified-play-services-tagmanager-v4-impl-11.0.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9a425922bedea04d18f55577a8cf075d/jetified-play-services-tagmanager-v4-impl-11.0.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9a425922bedea04d18f55577a8cf075d/jetified-play-services-tagmanager-v4-impl-11.0.1/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

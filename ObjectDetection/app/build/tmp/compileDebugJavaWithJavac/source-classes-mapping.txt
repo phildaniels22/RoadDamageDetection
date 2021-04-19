@@ -1,0 +1,20 @@
+org/pytorch/demo/objectdetection/BuildConfig.java
+ org.pytorch.demo.objectdetection.BuildConfig
+org/pytorch/demo/objectdetection/MainActivity.java
+ org.pytorch.demo.objectdetection.MainActivity
+ org.pytorch.demo.objectdetection.MainActivity$1
+org/pytorch/demo/objectdetection/ResultView.java
+ org.pytorch.demo.objectdetection.ResultView
+org/pytorch/demo/objectdetection/AbstractCameraXActivity.java
+ org.pytorch.demo.objectdetection.AbstractCameraXActivity
+org/pytorch/demo/objectdetection/BaseModuleActivity.java
+ org.pytorch.demo.objectdetection.BaseModuleActivity
+org/pytorch/demo/objectdetection/ObjectDetectionActivity.java
+ org.pytorch.demo.objectdetection.ObjectDetectionActivity
+ org.pytorch.demo.objectdetection.ObjectDetectionActivity$1
+ org.pytorch.demo.objectdetection.ObjectDetectionActivity$2
+ org.pytorch.demo.objectdetection.ObjectDetectionActivity$AnalysisResult
+org/pytorch/demo/objectdetection/PrePostProcessor.java
+ org.pytorch.demo.objectdetection.PrePostProcessor
+ org.pytorch.demo.objectdetection.PrePostProcessor$1
+ org.pytorch.demo.objectdetection.Result
